@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import { AddImageIconSVG, ProfileBackgroundSVG, ProfileHeaderSVG, ProfileIconSVG } from '../assests/svgPaths';
+
 // Simulated API response object
 const profileData = {
     username: "JohnDoe",
@@ -44,22 +45,22 @@ export default function Component() {
     }
 
     return (
-        <div className="relative w-[352px] h-[700px] roboto">
+        <div className="relative w-full max-w-[352px] h-[700px] roboto">
             {/* Background shape with white border */}
-            <ProfileBackgroundSVG className="absolute top-0 left-0" />
+            <ProfileBackgroundSVG className="absolute top-0 left-0 w-full" />
 
             {/* Content container */}
             <div className="relative z-10 flex flex-col items-center">
                 {/* Profile header with white border */}
                 <div className="w-full relative">
-                    <ProfileHeaderSVG />
-                    <h1 className="absolute top-2 left-4 text-[#F14A16] text-4xl font-normal px-8 s-sling">
+                    <ProfileHeaderSVG className="w-full" />
+                    <h1 className="absolute top-2 left-4 text-[#F14A16] text-3xl xl:text-4xl font-normal px-4 xl:px-8 s-sling">
                         PROFILE
                     </h1>
                 </div>
 
                 {/* Profile picture placeholder */}
-                <div className="mt-8 w-[149px] h-[146px] bg-[#2F2F2F] rounded-full flex items-center justify-center overflow-hidden group">
+                <div className="mt-8 w-[120px] xl:w-[149px] h-[120px] xl:h-[146px] bg-[#2F2F2F] rounded-full flex items-center justify-center overflow-hidden group">
                     {profileImage ? (
                         <Image
                             src={profileImage}
@@ -68,37 +69,37 @@ export default function Component() {
                             className="object-cover transition-transform duration-500 ease-in-out group-hover:rotate-360"
                         />
                     ) : (
-                        <ProfileIconSVG className="transition-transform duration-500 ease-in-out group-hover:rotate-360" />
+                        <ProfileIconSVG className="w-3/4 h-3/4 transition-transform duration-500 ease-in-out group-hover:rotate-360" />
                     )}
                 </div>
 
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="mt-4 px-4 py-2 bg-[#2F2F2F] text-white rounded-md flex items-center gap-2 hover:bg-[#3F3F3F] transition-colors duration-200"
+                    className="mt-4 px-3 xl:px-4 py-2 bg-[#2F2F2F] text-white rounded-md flex items-center gap-2 hover:bg-[#3F3F3F] transition-colors duration-200 text-sm xl:text-base"
                 >
                     Add Image
-                    <AddImageIconSVG />
+                    <AddImageIconSVG className="w-4 h-4 xl:w-5 xl:h-5" />
                 </button>
 
                 {/* Input fields */}
-                <div className="mt-9 w-full space-y-9 px-4">
+                <div className="mt-6 xl:mt-9 w-full space-y-6 xl:space-y-9 px-4">
                     <input
                         type="text"
                         value={profileData.username}
                         readOnly
-                        className="w-full h-12 px-4 bg-[#2F2F2F] text-white rounded-xl"
+                        className="w-full h-10 xl:h-12 px-4 bg-[#2F2F2F] text-white rounded-xl text-sm xl:text-base"
                     />
                     <input
                         type="text"
                         value={profileData.round}
                         readOnly
-                        className="w-full h-12 px-4 bg-[#2F2F2F] text-white rounded-xl"
+                        className="w-full h-10 xl:h-12 px-4 bg-[#2F2F2F] text-white rounded-xl text-sm xl:text-base"
                     />
                     <input
                         type="text"
                         value={profileData.totalScore}
                         readOnly
-                        className="w-full h-12 px-4 bg-[#2F2F2F] text-white rounded-xl"
+                        className="w-full h-10 xl:h-12 px-4 bg-[#2F2F2F] text-white rounded-xl text-sm xl:text-base"
                     />
                 </div>
             </div>
