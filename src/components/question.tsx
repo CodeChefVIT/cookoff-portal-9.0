@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from "@/api";
+
 
 interface Question {
   ID: string;
@@ -26,7 +27,7 @@ const Question: React.FC<QuestionProps> = ({ onQuestionSelect }) => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get("https://hope.codechefvit.com/question/round", {
+      const response = await api.get("https://hope.codechefvit.com/question/round", {
         withCredentials: true,
       });
       const fetchedQuestions = response.data.map((item: { question: Question }) => item.question);
