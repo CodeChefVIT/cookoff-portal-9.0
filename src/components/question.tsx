@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import api from "@/api";
-
 
 interface Question {
   ID: string;
@@ -16,48 +15,47 @@ interface Question {
 }
 
 interface QuestionProps {
-  onQuestionSelect: (id: string) => void; 
+  onQuestionSelect: (id: string) => void;
 }
 
 const Question: React.FC<QuestionProps> = ({ onQuestionSelect }) => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>("");
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number>(0);
-  const [selectedQuestion, setSelectedQuestion] = useState<Question>();
+  const [selectedQuestion, setSelectedQuestion] = useState<Question | undefined>(undefined);
 
-  const fetchQuestions = async () => {
+  const fetchQuestions = useCallback(async () => {
     try {
-      const response = await api.get("https://hope.codechefvit.com/question/round", {
-        withCredentials: true,
-      });
+      const response = await api.get("question/round");
       const fetchedQuestions = response.data.map((item: { question: Question }) => item.question);
       setQuestions(fetchedQuestions);
+
       if (fetchedQuestions.length > 0) {
-        setSelectedQuestionId(fetchedQuestions[0].ID); 
-        onQuestionSelect(fetchedQuestions[0].ID); 
+        const firstQuestion = fetchedQuestions[0];
+        setSelectedQuestionId(firstQuestion.ID);
+        setSelectedQuestion(firstQuestion);
+        onQuestionSelect(firstQuestion.ID);
         setSelectedQuestionIndex(0);
       }
-    } catch (err) {
-      console.error("Error fetching questions:", err);
+    } catch (error) {
+      console.error("Error fetching questions:", error);
     }
-  };
+  }, [onQuestionSelect]);
 
   const handleQuestionChange = (id: string, index: number) => {
     setSelectedQuestionId(id);
-    onQuestionSelect(id); 
     setSelectedQuestionIndex(index);
+    onQuestionSelect(id);
   };
 
   useEffect(() => {
-    const temp = questions.find(
-      (question) => question.ID === selectedQuestionId
-    );
-    setSelectedQuestion(temp);
-  }, [selectedQuestionId]);
+    fetchQuestions();
+  }, [fetchQuestions]);
 
   useEffect(() => {
-    fetchQuestions(); 
-  }, []);
+    const selected = questions.find((question) => question.ID === selectedQuestionId);
+    setSelectedQuestion(selected);
+  }, [selectedQuestionId, questions]);
 
   return (
     <div className="bg-gray1 flex flex-row h-[86vh] w-[45%] overflow-y-scroll">
@@ -66,8 +64,9 @@ const Question: React.FC<QuestionProps> = ({ onQuestionSelect }) => {
           <div
             key={question.ID}
             onClick={() => handleQuestionChange(question.ID, index)}
-            className={`flex justify-center items-center h-[80px] p-[22px] text-xl text-center border-b border-gray-700 cursor-pointer
-             ${question.ID === selectedQuestionId ? 'bg-gray1' : 'bg-black'}`}>
+            className={`flex justify-center items-center h-[80px] p-[22px] text-xl text-center border-b border-gray-700 cursor-pointer ${
+              question.ID === selectedQuestionId ? "bg-gray1" : "bg-black"
+            }`}>
             <span className="h-full">{index + 1}</span>
           </div>
         ))}
@@ -89,23 +88,26 @@ const Question: React.FC<QuestionProps> = ({ onQuestionSelect }) => {
             <p>{selectedQuestion.Description}</p>
             <br />
             <p>
-              <strong>Input Format:</strong><br />
+              <strong>Input Format:</strong>
+              <br />
               {selectedQuestion.InputFormat}
             </p>
             <br />
             <p>
-              <strong>Constraints:</strong><br />
+              <strong>Constraints:</strong>
+              <br />
               {selectedQuestion.Constraints}
             </p>
             <br />
             <p>
-              <strong>Output Format:</strong><br />
+              <strong>Output Format:</strong>
+              <br />
               {selectedQuestion.OutputFormat}
             </p>
           </div>
         )}
       </div>
-    </div>  
+    </div>
   );
 };
 
