@@ -4,15 +4,15 @@ import SelectLanguages from "@/components/ui/SelectLanguages";
 import boilerplates from "@/data/boilerplates.json";
 import {
   type ChildComponentProps,
+  type CodeSubmission,
   type TaskResult,
   type runCodeInterface,
-  type CodeSubmission,
 } from "@/schemas/api";
 import Editor, { loader, type OnMount } from "@monaco-editor/react";
 import type * as monaco from "monaco-editor";
 import { useEffect, useRef, useState } from "react";
-import SubmitCodeWindow from "./Submitcodewindow";
 import toast from "react-hot-toast";
+import SubmitCodeWindow from "./Submitcodewindow";
 
 // Load the Monaco Editor
 
@@ -147,7 +147,7 @@ export default function CodeEditor({
       setlatestClicked("submit");
   
       const submissionId = await submit(codeSubmission);
-      console.log("Submission ID:", submissionId);
+      
   
       let response: TaskResult | null = null;
       let retries = 0;
@@ -162,7 +162,7 @@ export default function CodeEditor({
           if (error.status === 504||408) {
             retries++;
             if (retries < maxRetries) {
-              console.log(`Retry attempt ${retries} after timeout...`);
+              
               await new Promise(resolve => setTimeout(resolve, retryDelay));
             } else {
               toast.error("Max retries reached. Submission failed.");
@@ -180,11 +180,9 @@ export default function CodeEditor({
           JSON.stringify(response)
         );
       } else {
-        throw new Error("Failed to get submission response");
+        toast.error("Something went wrong");
       }
-    } catch (error) {
-      console.error("Error submitting code:", error);
-    } finally {
+    }  finally {
       setIsSubmitting(false);
       setisRunClicked(false);
     }
