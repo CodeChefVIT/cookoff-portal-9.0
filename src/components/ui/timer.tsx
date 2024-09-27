@@ -56,7 +56,7 @@ const Timer = () => {
           setExpiryTime(expiry);
         }
       } catch (err) {
-        router.push("/dashboard");
+        
       }
     };
 

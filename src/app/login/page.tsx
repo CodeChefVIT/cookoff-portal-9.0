@@ -89,7 +89,7 @@ export default function Login() {
                 <input
                   {...register("email")}
                   type="text"
-                  className="mb-6 w-[390px] rounded-sm bg-viewSubmission p-3 placeholder-white"
+                  className="mb-6 w-[390px] rounded-sm bg-viewSubmission p-3 placeholder-white s-sling"
                   placeholder="Enter Username"
                   required
                 />
@@ -102,7 +102,7 @@ export default function Login() {
                   <input
                     {...register("password")}
                     type={showPassword ? "text" : "password"}
-                    className="w-[390px] rounded-sm bg-viewSubmission p-3 pr-10 placeholder-white"
+                    className="w-[390px] rounded-sm bg-viewSubmission p-3 pr-10 placeholder-white s-sling"
                     placeholder="Enter Password"
                     required
                   />
