@@ -6,7 +6,7 @@ import { type SubmitCodeWindowProps} from '@/schemas/api';
 export default function SubmitCodeWindow({taskres}: SubmitCodeWindowProps) {
   
   return (
-    <div className="bg-black text-white p-6 rounded-md mx-auto">
+    <div className="bg-black text-white p-6 rounded-md mx-auto mt-8">
       <h2 className="text-3xl font-semibold mb-3 text-accent text-left">Submission Result</h2>
       <div className="grid grid-cols-3 gap-4">
         <div className="font-semibold text-left text-xl mb-1">Test Case</div>
