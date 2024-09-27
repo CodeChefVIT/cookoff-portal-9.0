@@ -12,6 +12,7 @@ import Editor, { loader, type OnMount } from "@monaco-editor/react";
 import type * as monaco from "monaco-editor";
 import { useEffect, useRef, useState } from "react";
 import SubmitCodeWindow from "./Submitcodewindow";
+import toast from "react-hot-toast";
 
 // Load the Monaco Editor
 
@@ -136,7 +137,7 @@ export default function CodeEditor({
       language_id: languageId,
       question_id: questionId,
     };
-
+  
     try {
       localStorage.removeItem(localStorageSubmissionResultKey);
       setCodeData(null);
@@ -144,17 +145,45 @@ export default function CodeEditor({
       setIsSubmitting(true);
       setisRunClicked(true);
       setlatestClicked("submit");
-      
-
+  
       const submissionId = await submit(codeSubmission);
-
-      const response = await submission(submissionId);
-      setTaskResult(response);
-      localStorage.setItem(
-        localStorageSubmissionResultKey,
-        JSON.stringify(response),
-      );
+      console.log("Submission ID:", submissionId);
+  
+      let response: TaskResult | null = null;
+      let retries = 0;
+      const maxRetries = 3;
+      const retryDelay = 1000; // 1 seconds
+  
+      while (retries < maxRetries) {
+        try {
+          response = await submission(submissionId);
+          break; // If successful, exit the retry loop
+        } catch (error: any) {
+          if (error.status === 504||408) {
+            retries++;
+            if (retries < maxRetries) {
+              console.log(`Retry attempt ${retries} after timeout...`);
+              await new Promise(resolve => setTimeout(resolve, retryDelay));
+            } else {
+              toast.error("Max retries reached. Submission failed.");
+            }
+          } else {
+            toast.error("Something went wrong") ; // If it's not a timeout error, rethrow it
+          }
+        }
+      }
+  
+      if (response) {
+        setTaskResult(response);
+        localStorage.setItem(
+          localStorageSubmissionResultKey,
+          JSON.stringify(response)
+        );
+      } else {
+        throw new Error("Failed to get submission response");
+      }
     } catch (error) {
+      console.error("Error submitting code:", error);
     } finally {
       setIsSubmitting(false);
       setisRunClicked(false);
