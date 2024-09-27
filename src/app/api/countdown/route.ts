@@ -76,3 +76,36 @@ export async function GET(req: NextRequest) {
     { status: 200 }
   );
 }
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const body = (await req.json()) as { secretKey: string };
+    const { secretKey } = body;
+
+    if (!secretKey || secretKey !== SECRET_KEY) {
+      return NextResponse.json(
+        { message: "Invalid secret key" },
+        { status: 403 }
+      );
+    }
+
+    if (countdownEndTime === null) {
+      return NextResponse.json(
+        { message: "No active countdown to stop" },
+        { status: 400 }
+      );
+    }
+
+    countdownEndTime = null;
+
+    return NextResponse.json(
+      { message: "Countdown stopped", remainingTime: 0 },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Invalid request" },
+      { status: 500 }
+    );
+  }
+}

@@ -51,15 +51,10 @@ export default function EditorWindow({
       setLatestClicked("run");
       setLastSubmittedQuestionId(selectedQuestionId);
     } catch (err) {
-      console.log(err);
     } finally {
       setIsRunClicked(false);
     }
   }
-
-  useEffect(() => {
-    console.log(codeData);
-  }, [codeData]);
 
   return (
     <div className="h-[83vh] w-[55%] overflow-y-auto bg-dark 2xl:h-[86vh]">

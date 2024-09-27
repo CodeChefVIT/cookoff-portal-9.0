@@ -36,7 +36,6 @@ export default function Login() {
       });
       setTimeout(() => router.push("/dashboard"), 1000);
     } catch (err) {
-      console.error("Login failed:", err);
     }
     setIsLoading(false);
   }

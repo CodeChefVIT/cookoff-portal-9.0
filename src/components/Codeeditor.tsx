@@ -66,10 +66,7 @@ export default function CodeEditor({
         });
       })
       .catch((error) =>
-        console.error(
-          "An error occurred during initialization of Monaco: ",
-          error,
-        ),
+        console.error("An error occurred during initialization of Monaco: ", error),
       );
   }, []);
 
@@ -104,10 +101,6 @@ export default function CodeEditor({
     } else {
       setTaskResult(null);
     }
-    console.log("Saved Submission Result:", savedSubmissionResult);
-    console.log("Saved Code:", savedCode);
-    console.log("Saved Language ID:", savedLanguageId);
-    console.log("Saved Question ID:", questionId);
   }, [
     questionId,
     localStorageCodeKey,
@@ -154,7 +147,6 @@ export default function CodeEditor({
       
 
       const submissionId = await submit(codeSubmission);
-      console.log("Submission ID:", submissionId);
 
       const response = await submission(submissionId);
       setTaskResult(response);
@@ -163,7 +155,6 @@ export default function CodeEditor({
         JSON.stringify(response),
       );
     } catch (error) {
-      console.error("Error submitting code:", error);
     } finally {
       setIsSubmitting(false);
       setisRunClicked(false);

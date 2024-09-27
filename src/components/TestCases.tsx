@@ -33,7 +33,6 @@ export default function TestCases({ codeData }: testCaseProps) {
   // const [isClicked, setIsClicked] = useState(true);
   function handleTestClick(testKaKey: number) {
     setcurrentTestCase(testKaKey);
-    console.log(testKaKey);
   }
   useEffect(() => {
     if (codeData) {
@@ -65,11 +64,10 @@ export default function TestCases({ codeData }: testCaseProps) {
                     {allPassed ? "Great Work!! " : "Try Again!!!"}
                   </p>
                 </div>
-                
               </div>
             </div>
             <div className="flex justify-center text-white">
-              <div className="flex w-[40%] h-40 flex-col">
+              <div className="flex h-40 w-[40%] flex-col">
                 {codeData.result.map((item, index) => (
                   <div
                     key={index}
@@ -87,20 +85,13 @@ export default function TestCases({ codeData }: testCaseProps) {
                     />
                   </div>
                 ))}
-                {codeData ? (
-                  <button className="mx-3 my-2 rounded-lg bg-black border-2 border-dark px-4 py-3 text-center ">
-                    Custom Input
-                  </button>
-                ) : (
-                  ""
-                )}
               </div>
               <div className="mx-4 w-[60%]">
                 <div className="my-2">
                   <div className="">Message</div>
 
                   <div
-                    className={`${codeData.result[currentTestCase]?.status.description === "Accepted" ? "text-green2" : "text-red-500"} my-2 h-12 bg-lightGray px-4 py-3 text-base rounded-lg`}
+                    className={`${codeData.result[currentTestCase]?.status.description === "Accepted" ? "text-green2" : "text-red-500"} my-2 h-12 rounded-lg bg-lightGray px-4 py-3 text-base`}
                   >
                     {codeData.result[currentTestCase]?.status.description}
                   </div>
@@ -109,14 +100,21 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div className="text-base">Output</div>
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.stdout
-                      ? codeData.result[currentTestCase]?.stdout
+                      ? codeData.result[currentTestCase].stdout
+                          .split("\n")
+                          .map((line, index) => <div key={index}>{line}</div>)
                       : "-"}
                   </div>
                 </div>
+
                 <div className="my-2">
                   <div className="text-base">Expected Output</div>
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
-                    {codeData.result[currentTestCase]?.expected_output}
+                    {codeData.result[currentTestCase]?.expected_output
+                      ? codeData.result[currentTestCase].expected_output
+                          .split("\n")
+                          .map((line, index) => <div key={index}>{line}</div>)
+                      : "-"}
                   </div>
                 </div>
               </div>

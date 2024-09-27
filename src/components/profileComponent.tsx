@@ -32,7 +32,6 @@ export default function Component({
           setIsTimerActive(false);
         }
       } catch (err) {
-        console.error("Failed to fetch timer status:", err);
         setIsTimerActive(false);
       }
     };

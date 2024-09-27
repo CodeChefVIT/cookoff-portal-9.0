@@ -50,11 +50,9 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         }
       } catch (err) {
         if (err instanceof ApiError && err.statusCode === 401) {
-          console.error("Error fetching questions:", err);
           router.push("/login");
           return;
         }
-        console.error("Error fetching questions:", err);
         router.push("/dashboard");
       }
     };
