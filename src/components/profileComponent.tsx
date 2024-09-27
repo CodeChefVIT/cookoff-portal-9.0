@@ -1,19 +1,19 @@
 "use client";
 
 import chefhat from "@/assets/images/chefshat.svg";
+import { ProfileHeaderSVG } from "@/assets/svgPaths";
 import { type profileData } from "@/schemas/api";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation"; // Import useRouter
-import { ProfileHeaderSVG } from "@/assets/svgPaths";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 interface TimerResponse {
   message: string;
   remainingTime: number;
 }
 
-export default function Component({
+export default function ProfileComponent({
   profile,
 }: {
   profile: profileData | undefined;
