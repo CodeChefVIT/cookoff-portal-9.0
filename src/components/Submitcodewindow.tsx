@@ -1,5 +1,5 @@
+import { type SubmitCodeWindowProps } from '@/schemas/api';
 import React from 'react';
-import { type SubmitCodeWindowProps} from '@/schemas/api';
 
 
 
@@ -14,13 +14,13 @@ export default function SubmitCodeWindow({taskres}: SubmitCodeWindowProps) {
         <div className="font-semibold text-left text-xl mb-1">Description</div>
         {taskres.testcases.map((testcase, index) => (
           <React.Fragment key={testcase.testcase_id}>
-            <div className={`${testcase.status === 'Passed' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
+            <div className={`${testcase.status === 'success' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
               {index + 1}
             </div>
-            <div className={`${testcase.status === 'Passed' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
+            <div className={`${testcase.status === 'success' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
               {testcase.status}
             </div>
-            <div className={`${testcase.status === 'Passed' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
+            <div className={`${testcase.status === 'success' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
               {testcase.description}
             </div>
           </React.Fragment>

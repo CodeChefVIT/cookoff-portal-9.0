@@ -86,7 +86,7 @@ export default function Component({
           })
         ) : (
           <div className="flex justify-center items-center h-full text-5xl text-[#B7AB98] s-sling font-bold">
-            Wait for the Round to Start
+            No Submissions Yet !
           </div>
         )}
       </div>
