@@ -1,20 +1,20 @@
+import ChangeDevice from "@/components/ChangeDevice";
 import Providers from "@/lib/Providers";
 import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import ChangeDevice from "@/components/ChangeDevice";
 // import NavBar from "@/components/navBar/NavBar";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cookoff24.codechefvit.com/"),
-  title: "CookOff 9.0",
+  metadataBase: new URL("http://localhost:3000"),
+  title: "CodeChef-VIT",
   description: "Made with ♡ by CodeChef-VIT",
   icons: [{ rel: "icon", url: "/chefshat.svg" }],
   openGraph: {
-    title: "CookOff 9.0",
-    images: [{ url: "https://imgur.com/fNLW2oD" }],
-    url: "https://cookoff24.codechefvit.com/",
+    title: "CodeChef-VIT",
+    images: [{ url: "/open-graph.png" }],
+    url: "https://portal.codechefvit.com",
     type: "website",
     description: "Made with ♡ by CodeChef-VIT",
     siteName: "CookOff 9.0",
@@ -24,7 +24,11 @@ export const metadata: Metadata = {
     "CodeChef",
     "VIT",
     "Vellore Institute of Technology",
+    "GraVITas",
+    "gravitas",
     "CodeChef-VIT",
+    "Sulu",
+    "Judge0",
   ],
 };
 

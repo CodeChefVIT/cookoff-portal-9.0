@@ -81,7 +81,7 @@ export default function EditorWindow({
   }
 
   return (
-    <div className="h-[83vh] w-[55%] overflow-y-auto bg-dark 2xl:h-[86vh]">
+    <div className="h-[83vh] w-[55%] overflow-y-auto bg-[#131313] px-3 2xl:h-[86vh]">
       <Codeeditor
         selectedquestionId={selectedQuestionId}
         isRunClicked={isRunClicked}

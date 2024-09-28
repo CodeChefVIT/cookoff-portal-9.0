@@ -42,24 +42,6 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const timer = await axios.get<TimerResponse>("/api/countdown");
-        if (timer.data.remainingTime <= 0) {
-          toast.error("Time is up");
-         
-          setTimeout(() => {
-            router.push("/dashboard");
-          }, 1000);
-          return;
-        }
-      } catch {
-        toast.error("Timer not started");
-        
-        setTimeout(() => {
-          router.push("/dashboard");
-        }, 1000);
-        return;
-      }
-      try {
         const response = await byRound();
         const fetchedQuestions = response.map((item) => item.question);
         setQuestions(fetchedQuestions);
@@ -100,7 +82,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
 
       <div className="ml-2 w-screen text-white">
         {selectedQuestion && (
-          <div className="p-4">
+          <div className="p-4 pr-5">
             <span className="text-3xl font-bold text-accent">
               PROBLEM {selectedQuestionIndex + 1}: {selectedQuestion.Title}
             </span>
@@ -158,7 +140,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
                 <div key={i}>
                   {selectedQuestion.SampleTestInput?.[i] && (
                     <div className="mt-4">
-                      <strong>Sample Input {i}:</strong>
+                      <strong>Sample Input {i + 1}:</strong>
                       <SyntaxHighlighter
                         language="plaintext"
                         style={vscDarkPlus}
@@ -171,7 +153,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
 
                   {selectedQuestion.SampleTestOutput?.[i] && (
                     <div className="mt-4">
-                      <strong>Sample Output {i}:</strong>
+                      <strong>Sample Output {i + 1}:</strong>
                       <SyntaxHighlighter
                         language="plaintext"
                         style={vscDarkPlus}
@@ -184,7 +166,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
 
                   {selectedQuestion.Explanation?.[i] && (
                     <div className="mt-4">
-                      <strong>Explanation {i}:</strong>
+                      <strong>Explanation {i + 1}:</strong>
                       <Markdown>{selectedQuestion.Explanation[i]}</Markdown>
                     </div>
                   )}

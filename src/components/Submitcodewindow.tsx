@@ -1,12 +1,13 @@
 import { type SubmitCodeWindowProps } from '@/schemas/api';
 import React from 'react';
+import { type SubmitCodeWindowProps } from '@/schemas/api';
 
 
 
-export default function SubmitCodeWindow({taskres}: SubmitCodeWindowProps) {
-  
+export default function SubmitCodeWindow({ taskres }: SubmitCodeWindowProps) {
+
   return (
-    <div className="bg-black text-white p-6 rounded-md mx-auto mt-8">
+    <div className="bg-black text-white p-6 rounded-md mx-auto">
       <h2 className="text-3xl font-semibold mb-3 text-accent text-left">Submission Result</h2>
       <div className="grid grid-cols-3 gap-4">
         <div className="font-semibold text-left text-xl mb-1">Test Case</div>
@@ -14,13 +15,13 @@ export default function SubmitCodeWindow({taskres}: SubmitCodeWindowProps) {
         <div className="font-semibold text-left text-xl mb-1">Description</div>
         {taskres.testcases.map((testcase, index) => (
           <React.Fragment key={testcase.testcase_id}>
-            <div className={`${testcase.status === 'success' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
+            <div className={`${testcase.status === 'Passed' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
               {index + 1}
             </div>
-            <div className={`${testcase.status === 'success' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
+            <div className={`${testcase.status === 'Passed' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
               {testcase.status}
             </div>
-            <div className={`${testcase.status === 'success' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
+            <div className={`${testcase.status === 'Passed' ? 'text-green-500' : 'text-red-500'} text-left font-bold`}>
               {testcase.description}
             </div>
           </React.Fragment>
@@ -33,6 +34,4 @@ export default function SubmitCodeWindow({taskres}: SubmitCodeWindowProps) {
       </div>
     </div>
   );
-};
-
-
+}

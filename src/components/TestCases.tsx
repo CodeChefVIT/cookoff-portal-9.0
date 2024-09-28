@@ -47,12 +47,12 @@ export default function TestCases({ codeData }: testCaseProps) {
     <>
       {codeData ? (
         <div className="flex justify-center">
-          <div className="grid h-[60vh] w-full grid-rows-[2fr_5fr_2fr] bg-dark">
+          <div className="grid h-[60vh] w-full grid-rows-[2fr_5fr_2fr]">
             <div className="flex justify-center">
-              <div className="m-3 flex w-full items-center justify-between rounded-lg bg-lightGray px-6">
+              <div className="m-3 flex w-full items-center justify-between rounded-lg bg-lightGray px-4 py-3">
                 <div>
                   <p
-                    className={`${allPassed ? "text-green2" : "text-accent"} roboto text-2xl !font-medium`}
+                    className={`${allPassed ? "text-green2" : "text-[#EB3939]"} roboto text-2xl !font-medium`}
                   >
                     {codeData.no_testcases_passed +
                       "/" +
@@ -60,14 +60,14 @@ export default function TestCases({ codeData }: testCaseProps) {
                       " "}
                     Test Cases Have Passed {allPassed ? " :-)" : " :'-("}
                   </p>
-                  <p className="roboto text-sm text-white">
+                  <p className="roboto mt-1 text-sm text-white">
                     {allPassed ? "Great Work!! " : "Try Again!!!"}
                   </p>
                 </div>
               </div>
             </div>
             <div className="flex justify-center text-white">
-              <div className="flex h-40 w-[40%] flex-col">
+              <div className="flex w-[40%] h-40 flex-col">
                 {codeData.result.map((item, index) => (
                   <div
                     key={index}
@@ -101,8 +101,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.input
                       ? codeData.result[currentTestCase].input
-                          .split("\n")
-                          .map((line, index) => <div key={index}>{line}</div>)
+                        .split("\n")
+                        .map((line, index) => <div key={index}>{line}</div>)
                       : "-"}
                   </div>
                 </div>
@@ -112,8 +112,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.stdout
                       ? codeData.result[currentTestCase].stdout
-                          .split("\n")
-                          .map((line, index) => <div key={index}>{line}</div>)
+                        .split("\n")
+                        .map((line, index) => <div key={index}>{line}</div>)
                       : "-"}
                   </div>
                 </div>
@@ -123,8 +123,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.expected_output
                       ? codeData.result[currentTestCase].expected_output
-                          .split("\n")
-                          .map((line, index) => <div key={index}>{line}</div>)
+                        .split("\n")
+                        .map((line, index) => <div key={index}>{line}</div>)
                       : "-"}
                   </div>
                 </div>
