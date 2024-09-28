@@ -42,24 +42,6 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const timer = await axios.get<TimerResponse>("/api/countdown");
-        if (timer.data.remainingTime <= 0) {
-          toast.error("Time is up");
-
-          setTimeout(() => {
-            router.push("/dashboard");
-          }, 1000);
-          return;
-        }
-      } catch {
-        toast.error("Timer not started");
-
-        setTimeout(() => {
-          router.push("/dashboard");
-        }, 1000);
-        return;
-      }
-      try {
         const response = await byRound();
         const fetchedQuestions = response.map((item) => item.question);
         setQuestions(fetchedQuestions);

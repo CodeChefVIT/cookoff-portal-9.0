@@ -66,8 +66,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                 </div>
               </div>
             </div>
-            <div className="mx-3 flex justify-center bg-[#161616] py-1 text-white">
-              <div className="flex h-40 w-[40%] flex-col">
+            <div className="flex justify-center text-white">
+              <div className="flex w-[40%] h-40 flex-col">
                 {codeData.result.map((item, index) => (
                   <div
                     key={index}
@@ -101,8 +101,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.input
                       ? codeData.result[currentTestCase].input
-                          .split("\n")
-                          .map((line, index) => <div key={index}>{line}</div>)
+                        .split("\n")
+                        .map((line, index) => <div key={index}>{line}</div>)
                       : "-"}
                   </div>
                 </div>
@@ -112,8 +112,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.stdout
                       ? codeData.result[currentTestCase].stdout
-                          .split("\n")
-                          .map((line, index) => <div key={index}>{line}</div>)
+                        .split("\n")
+                        .map((line, index) => <div key={index}>{line}</div>)
                       : "-"}
                   </div>
                 </div>
@@ -123,8 +123,8 @@ export default function TestCases({ codeData }: testCaseProps) {
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.expected_output
                       ? codeData.result[currentTestCase].expected_output
-                          .split("\n")
-                          .map((line, index) => <div key={index}>{line}</div>)
+                        .split("\n")
+                        .map((line, index) => <div key={index}>{line}</div>)
                       : "-"}
                   </div>
                 </div>
