@@ -329,7 +329,7 @@ export default function CodeEditor({
               onClick={() => {
                 void runCode(runCodeParams);
               }}
-              className="rounded bg-[#242424] px-4 py-2 text-white disabled:bg-[#24242488] disabled:text-[#ffffff85]"
+              className="rounded bg-[#242424] px-4 py-2 text-cream disabled:bg-[#24242488] disabled:text-[#ffffff85] hover:text-white hover:bg-orange-600"
               disabled={isRunClicked}
             >
               {isRunClicked ? "Cooking..." : "Run Code"}
@@ -337,7 +337,7 @@ export default function CodeEditor({
             <button
               className={`rounded py-2 text-white ${
                 isSubmitting ? "bg-gray-500" : "bg-orange-600"
-              } w-28`}
+              } w-28 hover:bg-[#242424] hover:text-cream`}
               onClick={handleSubmitCode}
               disabled={isSubmitting}
             >

@@ -91,7 +91,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
           <button
             key={index}
             onClick={() => handleQuestionChange(question.ID, index)}
-            className={`flex h-full items-center justify-center border-b border-gray-700 px-4 text-center text-xl last:border-0 ${question.ID === selectedQuestionId ? "bg-gray1" : "bg-black"}`}
+            className={`flex h-full items-center justify-center border-b border-gray-700 px-4 text-center text-xl last:border-0 hover:bg-dark ${question.ID === selectedQuestionId ? "bg-gray1" : "bg-black"}`}
           >
             {index + 1}
           </button>

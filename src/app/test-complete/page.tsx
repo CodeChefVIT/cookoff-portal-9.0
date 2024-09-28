@@ -29,7 +29,7 @@ export default function TestComplete() {
           </div>
           <div className="mt-[50px]">
             <button
-              className="rounded-md border-2 border-accent px-6 py-2 text-cream"
+              className="rounded-md border-2 border-accent px-6 py-2 text-cream hover:bg-orange-600 hover:border-black hover:text-white"
               onClick={() => router.push("/kitchen")}
             >
               Back To Dashboard
