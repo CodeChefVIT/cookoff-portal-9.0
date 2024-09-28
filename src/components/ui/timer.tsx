@@ -9,7 +9,7 @@ interface TimeCount {
   seconds: string;
 }
 
-interface TimerResponse {
+export interface TimerResponse {
   message: string;
   remainingTime: number;
 }

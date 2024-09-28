@@ -1,5 +1,4 @@
 "use client";
-import Error from "@/app/error";
 import { type profileData } from "@/schemas/api";
 import { useState } from "react";
 import NavBar from "@/components/NavBar";

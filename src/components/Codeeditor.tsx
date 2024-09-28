@@ -14,6 +14,9 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import SubmitCodeWindow from "./Submitcodewindow";
 import { ApiError } from "next/dist/server/api-utils";
+import axios from "axios";
+import { type TimerResponse } from "./ui/timer";
+import { useRouter } from "next/navigation";
 
 // Load the Monaco Editor
 
@@ -26,6 +29,7 @@ export default function CodeEditor({
   codeData,
   setCodeData,
 }: ChildComponentProps) {
+  const router = useRouter();
   const [sourceCode, setSourceCode] = useState("");
   const [languageId, setLanguageId] = useState(71); // Default to Python
   const questionId = selectedquestionId; // Use selectedquestionId directly
@@ -143,6 +147,15 @@ export default function CodeEditor({
     };
 
     try {
+      const timer = await axios.get<TimerResponse>("/api/countdown");
+      if (timer.data.remainingTime <= 0) {
+        toast.error("Time is up");
+        setisRunClicked(false);
+        setTimeout(() => {
+          router.push("/dashboard");
+        });
+        return;
+      }
       localStorage.removeItem(localStorageSubmissionResultKey);
       setCodeData(null);
       setTaskResult(null);

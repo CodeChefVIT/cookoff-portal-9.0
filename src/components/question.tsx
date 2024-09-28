@@ -6,6 +6,7 @@ import { type Question } from "@/schemas/api";
 import { ApiError } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import vscDarkPlus from "react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus";
@@ -53,7 +54,10 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
           router.push("/");
           return;
         }
-        router.push("/dashboard");
+        toast.error("Failed to fetch questions");
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 2000);
       }
     };
 

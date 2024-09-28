@@ -2,7 +2,11 @@
 import api from "@/api";
 import Codeeditor from "@/components/Codeeditor";
 import TestCases from "@/components/TestCases";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { type TimerResponse } from "./ui/timer";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface runCodeInterface {
   source_code: string;
@@ -22,6 +26,7 @@ interface EditorWindowProps {
 export default function EditorWindow({
   selectedQuestionId,
 }: EditorWindowProps) {
+  const router = useRouter();
   const [isRunClicked, setIsRunClicked] = useState(false);
   const [codeData, setCodeData] = useState<runData | null>(null);
   const [latestClicked, setLatestClicked] = useState<string | null>(null);
@@ -46,6 +51,16 @@ export default function EditorWindow({
     };
 
     try {
+      const timer = await axios.get<TimerResponse>("/api/countdown");
+      if (timer.data.remainingTime <= 0) {
+        toast.error("Time is up");
+        setIsRunClicked(false);
+        setTimeout(() => {
+          router.push("/dashboard");
+        })
+        return;
+      }
+
       const response = await api.post<runData>("/runcode", sendData);
       setCodeData(response.data);
       setLatestClicked("run");
