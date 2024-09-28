@@ -1,8 +1,8 @@
 "use client";
 import check from "@/assets/images/check.png";
+import NavBar from "@/components/NavBar";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import NavBar from "@/components/NavBar";
 
 export default function TestComplete() {
   const router = useRouter();
@@ -30,7 +30,7 @@ export default function TestComplete() {
           <div className="mt-[50px]">
             <button
               className="rounded-md border-2 border-accent px-6 py-2 text-cream"
-              onClick={() => router.push("/dashboard")}
+              onClick={() => router.push("/kitchen")}
             >
               Back To Dashboard
             </button>

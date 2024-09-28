@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import vscDarkPlus from "react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus";
-import { TimerResponse } from "./ui/timer";
+import { type TimerResponse } from "./ui/timer";
 
 interface QuestionProps {
   onQuestionSelect: (id: string) => void;
@@ -47,7 +47,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
           toast.error("Time is up");
 
           setTimeout(() => {
-            router.push("/dashboard");
+            router.push("/kitchen");
           }, 1000);
           return;
         }
@@ -55,7 +55,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         toast.error("Timer not started");
 
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/kitchen");
         }, 1000);
         return;
       }
@@ -76,7 +76,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         }
         toast.error("Failed to fetch questions");
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/kitchen");
         }, 2000);
       }
     };

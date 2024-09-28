@@ -16,9 +16,9 @@ export default function QuesNavbar() {
 
   return (
     <div className="flex h-[17vh] w-screen flex-row items-center justify-between border-b-2 border-cream bg-black px-10 2xl:h-[14vh]">
-      <div>{path !== "/dashboard" && <Timer />}</div>
+      <div>{path !== "/kitchen" && <Timer />}</div>
       <div className="flex w-full flex-col items-center">
-        <div className="flex flex-col w-fit">
+        <div className="flex w-fit flex-col">
           <div>
             <span className="s-sling mr-8 text-7xl text-cream">COOK</span>
             <span className="s-sling mr-8 text-7xl text-accent">OFF</span>

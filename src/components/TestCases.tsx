@@ -96,6 +96,23 @@ export default function TestCases({ codeData }: testCaseProps) {
                     {codeData.result[currentTestCase]?.status.description}
                   </div>
                 </div>
+                {codeData.result[currentTestCase]?.status.description !==
+                  "Accepted" && (
+                  <div className="my-2">
+                    <div className="text-base">Error</div>
+                    <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
+                      {codeData.result[currentTestCase]?.compile_output
+                        ? codeData.result[currentTestCase].compile_output
+                            .split("\n")
+                            .map((line, index) => <div key={index}>{line}</div>)
+                        : codeData.result[currentTestCase]?.stderr
+                            .split("\n")
+                            .map((line, index) => (
+                              <div key={index}>{line}</div>
+                            ))}
+                    </div>
+                  </div>
+                )}
                 <div className="my-2">
                   <div className="text-base">Input</div>
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">

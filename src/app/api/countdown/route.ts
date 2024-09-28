@@ -15,14 +15,18 @@ export async function POST(req: NextRequest) {
     if (!secretKey || secretKey !== SECRET_KEY) {
       return NextResponse.json(
         { message: "Invalid secret key" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
-    if (!countdownTime || typeof countdownTime !== "number" || countdownTime <= 0) {
+    if (
+      !countdownTime ||
+      typeof countdownTime !== "number" ||
+      countdownTime <= 0
+    ) {
       return NextResponse.json(
         { message: "Invalid countdown time" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -30,29 +34,25 @@ export async function POST(req: NextRequest) {
       countdownEndTime = Date.now() + countdownTime * 1000;
       return NextResponse.json(
         { message: "Timer started", countdownEndTime },
-        { status: 200 }
+        { status: 200 },
       );
     }
 
     return NextResponse.json(
       { message: "Timer already started", countdownEndTime },
-      { status: 200 }
+      { status: 200 },
     );
-
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Invalid request" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({ message: "Invalid request" }, { status: 500 });
   }
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   // If the countdown hasn't started
   if (countdownEndTime === null) {
     return NextResponse.json(
       { message: "Timer not started yet", remainingTime: 0 },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
     countdownEndTime = null;
     return NextResponse.json(
       { message: "Countdown ended", remainingTime: 0 },
-      { status: 200 }
+      { status: 200 },
     );
   }
 
@@ -73,7 +73,7 @@ export async function GET(req: NextRequest) {
       message: "Countdown active",
       remainingTime: Math.floor(remainingTime / 1000),
     },
-    { status: 200 }
+    { status: 200 },
   );
 }
 
@@ -85,14 +85,14 @@ export async function PATCH(req: NextRequest) {
     if (!secretKey || secretKey !== SECRET_KEY) {
       return NextResponse.json(
         { message: "Invalid secret key" },
-        { status: 403 }
+        { status: 403 },
       );
     }
 
     if (countdownEndTime === null) {
       return NextResponse.json(
         { message: "No active countdown to stop" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -100,12 +100,9 @@ export async function PATCH(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Countdown stopped", remainingTime: 0 },
-      { status: 200 }
+      { status: 200 },
     );
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Invalid request" },
-      { status: 500 }
-    );
+  } catch {
+    return NextResponse.json({ message: "Invalid request" }, { status: 500 });
   }
 }

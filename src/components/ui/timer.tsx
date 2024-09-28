@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface TimeCount {
   hours: string;
@@ -13,7 +13,6 @@ export interface TimerResponse {
   message: string;
   remainingTime: number;
 }
-
 
 const getTimeLeft = (expiry: number): TimeCount => {
   let hours = "00";
@@ -55,13 +54,13 @@ const Timer = () => {
           const expiry = new Date().getTime() + data.remainingTime * 1000;
           setExpiryTime(expiry);
         }
-      } catch (err) {
-        
+      } catch {
+        router.push("/kitchen");
       }
     };
 
     void fetchTime();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (!expiryTime) return;
@@ -70,7 +69,11 @@ const Timer = () => {
       const time = getTimeLeft(expiryTime);
       setTimeLeft(time);
 
-      if (time.hours === "00" && time.minutes === "00" && time.seconds === "00") {
+      if (
+        time.hours === "00" &&
+        time.minutes === "00" &&
+        time.seconds === "00"
+      ) {
         clearInterval(interval); // Stop the countdown when it reaches zero
       }
     }, 1000);

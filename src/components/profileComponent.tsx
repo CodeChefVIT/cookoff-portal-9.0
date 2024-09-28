@@ -31,7 +31,7 @@ export default function ProfileComponent({
         } else {
           setIsTimerActive(false);
         }
-      } catch (err) {
+      } catch {
         setIsTimerActive(false);
       }
     };
@@ -71,7 +71,10 @@ export default function ProfileComponent({
             {"Round: " + profile?.round ?? "Nothing yet."}
           </div>
           <div className="h-full w-full rounded-xl bg-[#2F2F2F] p-4 text-center text-white">
-            {"Score: " + profile?.score.toFixed(2) ?? "Nothing yet."}
+            {"Score: " +
+              (profile?.score
+                ? Math.round(profile.score * 100) / 100
+                : "Nothing yet.")}
           </div>
 
           {isTimerActive && (

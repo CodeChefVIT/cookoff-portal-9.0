@@ -1,8 +1,8 @@
 "use client";
 import cat from "@/assets/images/cat.svg";
 import dog from "@/assets/images/dog.svg";
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Error() {
   // Function to handle click events
@@ -15,17 +15,19 @@ export default function Error() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-black via-orange-500/90 to-black min-h-screen overflow-y-hidden">
-      <div className='mt-36 text-center text-5xl s-sling text-orange-500 bg-gradient-to-r from-red-500 via-orange-500 to-white bg-clip-text text-transparent'>
+    <div className="min-h-screen overflow-y-hidden bg-gradient-to-b from-black via-orange-500/90 to-black">
+      <div className="s-sling mt-36 bg-gradient-to-r from-red-500 via-orange-500 to-white bg-clip-text text-center text-5xl text-orange-500 text-transparent">
         Something Went Wrong
       </div>
-      <p className='text-white text-center s-sling'>Could not find the requested resource</p>
-      <p className='text-center mt-5 font-bold text-2xl font-mono text-orange-700 bg-gradient-to-r from-red-500 via-orange-500 to-white bg-clip-text text-transparent'>
+      <p className="s-sling text-center text-white">
+        Could not find the requested resource
+      </p>
+      <p className="mt-5 bg-gradient-to-r from-red-500 via-orange-500 to-white bg-clip-text text-center font-mono text-2xl font-bold text-orange-700 text-transparent">
         While we wait for this to happen, are you a dog person or a cat person?
       </p>
-      <div className="flex gap-10 mx-auto items-center justify-center">
+      <div className="mx-auto flex items-center justify-center gap-10">
         <Image
-          className="mt-10 rounded-lg cursor-pointer"
+          className="mt-10 cursor-pointer rounded-lg"
           src={dog as HTMLImageElement}
           alt="dog"
           width={500}
@@ -33,7 +35,7 @@ export default function Error() {
           onClick={handleDogClick} // Click handler for dog
         />
         <Image
-          className="mt-10 rounded-lg cursor-pointer"
+          className="mt-10 cursor-pointer rounded-lg"
           src={cat as HTMLImageElement}
           alt="cat"
           width={500}
@@ -41,9 +43,11 @@ export default function Error() {
           onClick={handleCatClick} // Click handler for cat
         />
       </div>
-      <div className="text-center text-xl mt-10 s-sling">
-        <Link href="/dashboard" className='text-white'>Return to DashBoard</Link>
+      <div className="s-sling mt-10 text-center text-xl">
+        <Link href="/kitchen" className="text-white">
+          Return to DashBoard
+        </Link>
       </div>
     </div>
-  )
+  );
 }

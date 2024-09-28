@@ -55,22 +55,74 @@ export default function CodeEditor({
       .then((monaco) => {
         monaco.editor.defineTheme("gruvbox-dark", {
           base: "vs-dark",
-          inherit: true,
+          inherit: false,
           rules: [
-            { token: "", foreground: "ebdbb2", background: "282828" },
-            { token: "keyword", foreground: "fb4934" },
-            { token: "string", foreground: "b8bb26" },
-            { token: "number", foreground: "d3869b" },
-            { token: "comment", foreground: "928374" },
+            { token: "", foreground: "ebdbb2", background: "32302f" }, // Default text
+            { token: "invalid", foreground: "fb4934" }, // Error
+            { token: "emphasis", fontStyle: "italic" },
+            { token: "strong", fontStyle: "bold" },
+
+            { token: "variable", foreground: "d79921" }, // Variable
+            { token: "variable.predefined", foreground: "fabd2f" }, // Predefined variable
+            { token: "constant", foreground: "d3869b" }, // Constants
+            { token: "comment", foreground: "928374" }, // Comment
+            { token: "number", foreground: "d3869b" }, // Number
+            { token: "number.hex", foreground: "8ec07c" }, // Hex number
+            { token: "regexp", foreground: "b8bb26" }, // Regex
+            { token: "annotation", foreground: "fe8019" }, // Annotation
+            { token: "type", foreground: "83a598" }, // Type
+
+            { token: "delimiter", foreground: "ebdbb2" }, // Delimiters
+            { token: "delimiter.html", foreground: "d5c4a1" },
+            { token: "delimiter.xml", foreground: "83a598" },
+
+            { token: "tag", foreground: "fb4934" }, // Tags (HTML/XML)
+            { token: "tag.id.pug", foreground: "83a598" },
+            { token: "tag.class.pug", foreground: "fabd2f" },
+            { token: "meta.scss", foreground: "fabd2f" }, // SCSS meta
+            { token: "metatag", foreground: "fb4934" }, // Metatags
+            { token: "metatag.content.html", foreground: "b8bb26" },
+            { token: "metatag.html", foreground: "928374" },
+            { token: "metatag.xml", foreground: "928374" },
+            { token: "metatag.php", fontStyle: "bold" },
+
+            { token: "key", foreground: "fabd2f" }, // Object keys
+            { token: "string.key.json", foreground: "d79921" },
+            { token: "string.value.json", foreground: "b8bb26" },
+
+            { token: "attribute.name", foreground: "fb4934" }, // Attribute names
+            { token: "attribute.value", foreground: "b8bb26" }, // Attribute values
+            { token: "attribute.value.number", foreground: "d3869b" },
+            { token: "attribute.value.unit", foreground: "d3869b" },
+            { token: "attribute.value.html", foreground: "8ec07c" },
+            { token: "attribute.value.xml", foreground: "8ec07c" },
+
+            { token: "string", foreground: "b8bb26" }, // Strings
+            { token: "string.html", foreground: "8ec07c" },
+            { token: "string.sql", foreground: "b8bb26" },
+            { token: "string.yaml", foreground: "b8bb26" },
+
+            { token: "keyword", foreground: "fb4934" }, // Keywords
+            { token: "keyword.json", foreground: "fb4934" },
+            { token: "keyword.flow", foreground: "fb4934" },
+            { token: "keyword.flow.scss", foreground: "fb4934" },
+
+            { token: "operator.scss", foreground: "fe8019" }, // Operators
+            { token: "operator.sql", foreground: "fabd2f" },
+            { token: "operator.swift", foreground: "fe8019" },
+            { token: "predefined.sql", foreground: "fabd2f" }, // Predefined SQL
           ],
           colors: {
-            "editor.background": "#282828",
-            "editor.foreground": "#ebdbb2",
-            "editorCursor.foreground": "#ebdbb2",
-            "editor.lineHighlightBackground": "#3c3836",
-            "editorLineNumber.foreground": "#928374",
-            "editor.selectionBackground": "#504945",
-            "editor.inactiveSelectionBackground": "#3c3836",
+            "editor.background": "#32302f", // Dark background
+            "editor.foreground": "#ebdbb2", // Light text
+            "editor.selectionBackground": "#665c54", // Selected text
+            "editor.inactiveSelectionBackground": "#504945",
+            "editor.lineHighlightBackground": "#3c3836", // Line highlight
+            "editorCursor.foreground": "#fe8019", // Cursor
+            "editorWhitespace.foreground": "#7c6f64", // Whitespace
+            "editorIndentGuide.background": "#504945", // Indentation guide
+            "editorIndentGuide.activeBackground": "#665c54", // Active indentation guide
+            "editor.selectionHighlight": "#bdae9350", // Selection highlight
           },
         });
       })
@@ -81,6 +133,28 @@ export default function CodeEditor({
         ),
       );
   }, []);
+
+  function handlesyntax (languageId: number):string {
+    switch (languageId) {
+      case 71:
+        return "python";
+      case 62:
+        return "java";
+      case 50:
+        return "c";
+      case 54:
+        return "cpp";
+      case 63:
+        return "javascript";
+      case 73:
+        return "rust";
+      case 60:
+        return "go";
+      default:
+        return "plaintext";
+    }
+  
+  }
 
   // Load saved code and language from localStorage
   useEffect(() => {
@@ -156,7 +230,7 @@ export default function CodeEditor({
           toast.error("Time is up");
           setisRunClicked(false);
           setTimeout(() => {
-            router.push("/dashboard");
+            router.push("/kitchen");
           }, 1000);
           return;
         }
@@ -164,7 +238,7 @@ export default function CodeEditor({
         toast.error("Timer not started");
         setisRunClicked(false);
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/kitchen");
         }, 1000);
         return;
       }
@@ -242,7 +316,7 @@ export default function CodeEditor({
           <Editor
             theme="gruvbox-dark"
             height="50vh"
-            defaultLanguage="cpp"
+            defaultLanguage={handlesyntax(languageId)}
             value={sourceCode}
             onMount={handleEditorDidMount}
             onChange={handleOnChange}
@@ -254,7 +328,6 @@ export default function CodeEditor({
             <button
               onClick={() => {
                 void runCode(runCodeParams);
-        
               }}
               className="rounded bg-[#242424] px-4 py-2 text-white disabled:bg-[#24242488] disabled:text-[#ffffff85]"
               disabled={isRunClicked}

@@ -76,7 +76,7 @@ export default function Component({
                         </p>
                         <div className="text-md text-[#B7AB98]">
                           {"Your Score is:  " +
-                            problem.score.toFixed(2) +
+                            Math.round(problem.score * 100) / 100 +
                             "/" +
                             problem.max_score}
                         </div>
@@ -89,7 +89,7 @@ export default function Component({
           })
         ) : (
           <div className="s-sling mx-auto flex h-full w-fit items-center justify-center text-4xl font-bold text-[#B7AB98]">
-            No Submissions Yet !
+            {data?.round ? "No submissions yet" : "Event not started yet"}
           </div>
         )}
       </div>
