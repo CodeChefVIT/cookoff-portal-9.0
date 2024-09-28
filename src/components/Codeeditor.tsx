@@ -144,13 +144,22 @@ export default function CodeEditor({
     };
 
     try {
-      const timer = await axios.get<TimerResponse>("/api/countdown");
-      if (timer.data.remainingTime <= 0) {
-        toast.error("Time is up");
+      try {
+        const timer = await axios.get<TimerResponse>("/api/countdown");
+        if (timer.data.remainingTime <= 0) {
+          toast.error("Time is up");
+          setisRunClicked(false);
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 1000);
+          return;
+        }
+      } catch {
+        toast.error("Timer not started");
         setisRunClicked(false);
         setTimeout(() => {
           router.push("/dashboard");
-        });
+        }, 1000);
         return;
       }
       localStorage.removeItem(localStorageSubmissionResultKey);

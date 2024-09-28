@@ -43,7 +43,7 @@ export default function EditorWindow({
     question_id,
   }: runCodeInterface) {
     setIsRunClicked(true);
-    setCodeData(null);
+
     const sendData: runCodeInterface = {
       source_code,
       language_id,
@@ -51,13 +51,22 @@ export default function EditorWindow({
     };
 
     try {
-      const timer = await axios.get<TimerResponse>("/api/countdown");
-      if (timer.data.remainingTime <= 0) {
-        toast.error("Time is up");
+      try {
+        const timer = await axios.get<TimerResponse>("/api/countdown");
+        if (timer.data.remainingTime <= 0) {
+          toast.error("Time is up");
+          setIsRunClicked(false);
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 1000);
+          return;
+        }
+      } catch {
+        toast.error("Timer not started");
         setIsRunClicked(false);
         setTimeout(() => {
           router.push("/dashboard");
-        })
+        }, 1000);
         return;
       }
 

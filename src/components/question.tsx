@@ -3,6 +3,7 @@
 
 import { byRound } from "@/api/question";
 import { type Question } from "@/schemas/api";
+import axios from "axios";
 import { ApiError } from "next/dist/server/api-utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ import toast from "react-hot-toast";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import vscDarkPlus from "react-syntax-highlighter/dist/esm/styles/prism/vsc-dark-plus";
+import { TimerResponse } from "./ui/timer";
 
 interface QuestionProps {
   onQuestionSelect: (id: string) => void;
@@ -39,6 +41,24 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
 
   useEffect(() => {
     const fetchQuestions = async () => {
+      try {
+        const timer = await axios.get<TimerResponse>("/api/countdown");
+        if (timer.data.remainingTime <= 0) {
+          toast.error("Time is up");
+         
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 1000);
+          return;
+        }
+      } catch {
+        toast.error("Timer not started");
+        
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
+        return;
+      }
       try {
         const response = await byRound();
         const fetchedQuestions = response.map((item) => item.question);
