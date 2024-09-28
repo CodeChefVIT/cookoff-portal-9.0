@@ -12,7 +12,7 @@ type TestCompProps = {
 export default function TestComp({ isPassed, num, isClicked }: TestCompProps) {
   return (
     <div
-      className={`mx-3 my-2 flex cursor-pointer h-14 items-center justify-evenly rounded-lg border-2 bg-black px-4 py-3 text-center ${isClicked && isPassed ? "border-green2" : isClicked && !isPassed ? "border-accent" : "border-dark"}`}
+      className={`mx-3 my-2 flex h-14 cursor-pointer items-center justify-evenly rounded-lg border-2 bg-black px-4 py-3 text-center ${isClicked && isPassed ? "border-green2" : isClicked && !isPassed ? "border-accent" : "border-dark"}`}
     >
       <Image
         className=""
