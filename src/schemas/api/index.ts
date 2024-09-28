@@ -70,7 +70,7 @@ export interface runCodeInterface {
 }
 
 export interface ChildComponentProps {
-  handleRun: (runCodeInterface: runCodeInterface) => void;
+  handleRun: (runCodeInterface: runCodeInterface) => Promise<void>;
   isRunClicked: boolean;
   setisRunClicked: Dispatch<SetStateAction<boolean>>;
   selectedquestionId: string;

@@ -9,14 +9,14 @@ import {
   type runCodeInterface,
 } from "@/schemas/api";
 import Editor, { loader, type OnMount } from "@monaco-editor/react";
+import axios from "axios";
 import type * as monaco from "monaco-editor";
+import { ApiError } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import SubmitCodeWindow from "./Submitcodewindow";
-import { ApiError } from "next/dist/server/api-utils";
-import axios from "axios";
 import { type TimerResponse } from "./ui/timer";
-import { useRouter } from "next/navigation";
 
 // Load the Monaco Editor
 
@@ -42,6 +42,12 @@ export default function CodeEditor({
   const localStorageCodeKey = `code-${questionId}-${languageId}`;
   const localStorageLanguageKey = `language-${questionId}`;
   const localStorageSubmissionResultKey = `submission-result-${questionId}`;
+
+  async function runCode(runCodeParams: runCodeInterface) {
+    setIsSubmitting(true);
+    await handleRun(runCodeParams);
+    setIsSubmitting(false);
+  }
 
   useEffect(() => {
     loader
@@ -247,12 +253,13 @@ export default function CodeEditor({
           <div className="mt-4 flex w-full justify-end space-x-4">
             <button
               onClick={() => {
-                handleRun(runCodeParams);
+                void runCode(runCodeParams);
+        
               }}
               className="rounded bg-[#242424] px-4 py-2 text-white disabled:bg-[#24242488] disabled:text-[#ffffff85]"
               disabled={isRunClicked}
             >
-              {isRunClicked ? "Cooking..." : "Cook"}
+              {isRunClicked ? "Cooking..." : "Run Code"}
             </button>
             <button
               className={`rounded py-2 text-white ${
