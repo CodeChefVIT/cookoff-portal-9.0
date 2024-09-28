@@ -35,12 +35,12 @@ export default function Login() {
         error: (err: ApiError) => err.message,
       });
       setTimeout(() => router.push("/dashboard"), 1000);
-    } catch (err) {}
+    } catch (err) { }
     setIsLoading(false);
   }
 
   return (
-    <div className="min-w-screen flex h-screen flex-col items-center justify-center gap-10 bg-[#202020] text-accent">
+    <div className="min-w-screen h-full-screen flex h-screen flex-col items-center justify-center bg-[#202020] text-accent">
       <h1 className="s-sling pt-5 text-3xl font-bold text-accent">
         CODECHEF PRESENTS
       </h1>
