@@ -38,9 +38,6 @@ export default function CodeEditor({
   const [isSubmitting, setIsSubmitting] = useState(false); // State for button submission
 
   const [taskResult, setTaskResult] = useState<TaskResult | null>(null);
-  const [lastSubmittedQuestionId, setLastSubmittedQuestionId] = useState<
-    string | null
-  >(null);
 
   const localStorageCodeKey = `code-${questionId}-${languageId}`;
   const localStorageLanguageKey = `language-${questionId}`;
