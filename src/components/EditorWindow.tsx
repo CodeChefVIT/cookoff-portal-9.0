@@ -3,10 +3,10 @@ import api from "@/api";
 import Codeeditor from "@/components/Codeeditor";
 import TestCases from "@/components/TestCases";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { type TimerResponse } from "./ui/timer";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { type TimerResponse } from "./ui/timer";
 
 interface runCodeInterface {
   source_code: string;

@@ -39,7 +39,7 @@ export default function Component({
   return (
     <div className="roboto relative ml-16 flex w-[60vw] flex-grow font-sans text-white">
       {/* Main Container */}
-      <div className="left-6 right-6 flex flex-grow flex-col gap-6">
+      <div className="flex flex-grow flex-col gap-6">
         {hasRounds ? (
           Object.keys(data.submissions).map((roundKey, i) => {
             const roundSubmissions = data.submissions[roundKey];
@@ -49,8 +49,8 @@ export default function Component({
                 className="relative h-32 flex-grow overflow-auto rounded-lg bg-[#2C2C2C] p-6 pt-0 shadow-lg"
               >
                 {/* Round Header */}
-                <div className="sticky top-0 flex items-center justify-between pt-6 backdrop-blur -mx-6">
-                  <h2 className="font-mono text-3xl font-bold tracking-wider text-[#F14A16] ml-6">
+                <div className="sticky top-0 -mx-6 flex items-center justify-between pt-6 backdrop-blur">
+                  <h2 className="ml-6 font-mono text-3xl font-bold tracking-wider text-[#F14A16]">
                     ROUND {roundKey}
                   </h2>
                 </div>
@@ -75,7 +75,10 @@ export default function Component({
                             : problem.description}
                         </p>
                         <div className="text-md text-[#B7AB98]">
-                          {"Your Score is:  " +problem.score.toFixed(2)+"/"+problem.max_score}
+                          {"Your Score is:  " +
+                            problem.score.toFixed(2) +
+                            "/" +
+                            problem.max_score}
                         </div>
                       </div>
                     </div>
@@ -85,7 +88,7 @@ export default function Component({
             );
           })
         ) : (
-          <div className="flex justify-center items-center h-full text-5xl text-[#B7AB98] s-sling font-bold">
+          <div className="s-sling mx-auto flex h-full w-fit items-center justify-center text-4xl font-bold text-[#B7AB98]">
             No Submissions Yet !
           </div>
         )}

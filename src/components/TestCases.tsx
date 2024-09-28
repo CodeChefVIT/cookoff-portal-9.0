@@ -97,6 +97,17 @@ export default function TestCases({ codeData }: testCaseProps) {
                   </div>
                 </div>
                 <div className="my-2">
+                  <div className="text-base">Input</div>
+                  <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
+                    {codeData.result[currentTestCase]?.input
+                      ? codeData.result[currentTestCase].input
+                          .split("\n")
+                          .map((line, index) => <div key={index}>{line}</div>)
+                      : "-"}
+                  </div>
+                </div>
+
+                <div className="my-2">
                   <div className="text-base">Output</div>
                   <div className="my-2 rounded bg-lightGray px-4 py-3 text-base">
                     {codeData.result[currentTestCase]?.stdout
