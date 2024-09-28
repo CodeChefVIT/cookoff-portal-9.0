@@ -1,6 +1,6 @@
 "use client";
 import TestComp from "@/components/TestComp";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface testCaseProps {
   codeData: codeData;

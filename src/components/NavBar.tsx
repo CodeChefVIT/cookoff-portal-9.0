@@ -10,7 +10,7 @@ export default function NavBar() {
     } catch {
       toast.error("Something went wrong.");
     }
-    setTimeout(() => router.push("/login"), 1000);
+    setTimeout(() => router.push("/"), 1000);
   }
   return (
     <div>

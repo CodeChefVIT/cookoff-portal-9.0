@@ -50,7 +50,7 @@ export default function Question({ onQuestionSelect }: QuestionProps) {
         }
       } catch (err) {
         if (err instanceof ApiError && err.statusCode === 401) {
-          router.push("/login");
+          router.push("/");
           return;
         }
         router.push("/dashboard");

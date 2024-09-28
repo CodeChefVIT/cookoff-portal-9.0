@@ -77,7 +77,7 @@ export default function ProfileComponent({
           {isTimerActive && (
             <div className="flex justify-center">
               <button
-                onClick={() => router.push("/")} // Navigate to root route
+                onClick={() => router.push("/oven")} // Navigate to root route
                 className="s-sling mt-4 w-full rounded-lg bg-[#F14A16] px-6 py-3 text-white transition-colors hover:bg-[#d13e14]"
               >
                 Start Cooking
