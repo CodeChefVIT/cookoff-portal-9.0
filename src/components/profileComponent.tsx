@@ -40,7 +40,7 @@ export default function ProfileComponent({
   }, []);
 
   return (
-    <div className="roboto relative my-auto max-h-full">
+    <div className="roboto relative my-auto max-h-full w-min bg-[#202020] p-4">
       {/* Background shape with white border */}
       {/* <ProfileBackgroundSVG className="absolute top-0 left-0 max-h-fit" /> */}
 
