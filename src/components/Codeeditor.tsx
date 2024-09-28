@@ -253,7 +253,7 @@ export default function CodeEditor({
           <div className="mt-4 flex w-full justify-end space-x-4">
             <button
               onClick={() => {
-                runCode(runCodeParams);
+                void runCode(runCodeParams);
         
               }}
               className="rounded bg-[#242424] px-4 py-2 text-white disabled:bg-[#24242488] disabled:text-[#ffffff85]"
