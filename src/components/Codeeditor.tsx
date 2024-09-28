@@ -13,6 +13,7 @@ import type * as monaco from "monaco-editor";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import SubmitCodeWindow from "./Submitcodewindow";
+import { ApiError } from "next/dist/server/api-utils";
 
 // Load the Monaco Editor
 
@@ -67,7 +68,10 @@ export default function CodeEditor({
         });
       })
       .catch((error) =>
-        console.error("An error occurred during initialization of Monaco: ", error),
+        console.error(
+          "An error occurred during initialization of Monaco: ",
+          error,
+        ),
       );
   }, []);
 
@@ -137,7 +141,7 @@ export default function CodeEditor({
       language_id: languageId,
       question_id: questionId,
     };
-  
+
     try {
       localStorage.removeItem(localStorageSubmissionResultKey);
       setCodeData(null);
@@ -145,44 +149,46 @@ export default function CodeEditor({
       setIsSubmitting(true);
       setisRunClicked(true);
       setlatestClicked("submit");
-  
+
       const submissionId = await submit(codeSubmission);
-      
-  
+
       let response: TaskResult | null = null;
       let retries = 0;
       const maxRetries = 3;
       const retryDelay = 1000; // 1 seconds
-  
+
       while (retries < maxRetries) {
         try {
           response = await submission(submissionId);
-          break; // If successful, exit the retry loop
-        } catch (error: any) {
-          if (error.status === 504||408) {
-            retries++;
-            if (retries < maxRetries) {
-              
-              await new Promise(resolve => setTimeout(resolve, retryDelay));
+          break;
+        } catch (error) {
+          if (error instanceof ApiError) {
+            if (error.statusCode === 504 || error.statusCode === 408) {
+              retries++;
+              if (retries < maxRetries) {
+                await new Promise((resolve) => setTimeout(resolve, retryDelay));
+              } else {
+                toast.error("Max retries reached. Submission failed.");
+              }
             } else {
-              toast.error("Max retries reached. Submission failed.");
+              toast.error("Something went wrong");
             }
           } else {
-            toast.error("Something went wrong") ; // If it's not a timeout error, rethrow it
+            toast.error("Something went wrong");
           }
         }
       }
-  
+
       if (response) {
         setTaskResult(response);
         localStorage.setItem(
           localStorageSubmissionResultKey,
-          JSON.stringify(response)
+          JSON.stringify(response),
         );
       } else {
         toast.error("Something went wrong");
       }
-    }  finally {
+    } finally {
       setIsSubmitting(false);
       setisRunClicked(false);
     }
