@@ -15,6 +15,7 @@ import type * as z from "zod";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,6 +28,7 @@ export default function Login() {
   });
 
   async function onSubmit(data: z.infer<typeof loginFormSchema>) {
+    setIsButtonDisabled(true);
     setIsLoading(true);
     try {
       await toast.promise(login(data), {
@@ -34,9 +36,10 @@ export default function Login() {
         success: "Logged in successfully!",
         error: (err: ApiError) => err.message,
       });
-      setTimeout(() => router.push("/kitchen"), 1000);
-    } catch {}
+      setTimeout(() => router.push("/dashboard"), 1000);
+    } catch (err) { }
     setIsLoading(false);
+    setIsButtonDisabled(false);
   }
 
   return (
@@ -119,7 +122,7 @@ export default function Login() {
                 <button
                   type="submit"
                   className="s-sling mt-4 w-[100px] rounded-md bg-accent p-3 text-white"
-                  disabled={isLoading}
+                  disabled={isLoading || isButtonDisabled}
                 >
                   Login
                 </button>
