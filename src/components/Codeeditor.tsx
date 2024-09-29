@@ -134,8 +134,8 @@ export default function CodeEditor({
       );
   }, []);
 
-  function handlesyntax(languageId: number): string {
-    switch (languageId) {
+  function handleSyntax(id: number): string {
+    switch (id) {
       case 71:
         return "python";
       case 62:
@@ -312,7 +312,8 @@ export default function CodeEditor({
           <Editor
             theme="gruvbox-dark"
             height="50vh"
-            defaultLanguage={handlesyntax(languageId)}
+            defaultLanguage={"python"}
+            language={handleSyntax(languageId)}
             value={sourceCode}
             onMount={handleEditorDidMount}
             onChange={handleOnChange}
