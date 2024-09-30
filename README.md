@@ -233,7 +233,7 @@ Make sure you set user role as 'admin' in database to access all the admin speci
       <p style="font-size:17px; font-weight:600;">Sulu</p>
       <p align="center">
         <a href="https://www.sulu.sh/">
-          <img src="https://www.anyrgb.com/en-clipart-hbttn" width="36" height="36" alt="Website"/>
+          <img src="https://img.icons8.com/hatch/64/228BE6/internet.png" width="36" height="36" alt="Website"/>
         </a>
       </p>
     </td>
@@ -244,7 +244,7 @@ Make sure you set user role as 'admin' in database to access all the admin speci
       <p style="font-size:17px; font-weight:600;">Judge 0</p>
       <p align="center">
         <a href="https://judge0.com/">
-          <img src="https://www.anyrgb.com/en-clipart-hbttn" width="36" height="36" alt="Website"/>
+          <img src="https://img.icons8.com/hatch/64/228BE6/internet.png" width="36" height="36" alt="Website"/>
         </a>
       </p>
     </td>
