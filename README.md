@@ -10,7 +10,7 @@
 
 ## 🌐 Deploy
 
-[https://cookoff.codechefvit.com/](https://project-name.codechefvit.com/)
+[https://cookoff24.codechefvit.com/](https://project-name.codechefvit.com/)
 
 ## ⚙️ Tech Stack:
 
