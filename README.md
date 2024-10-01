@@ -220,17 +220,14 @@ Make sure you set user role as 'admin' in database to access all the admin speci
 </table>
 
 
+## Powered by
 
-##  Powered by
-
-##  Powered by
-
-<table align="center">
+<table>
   <tr align="center">
     <!-- Sponsor 1: Sulu -->
     <td>
       <p align="center">
-        <img src="https://framerusercontent.com/images/IXr0RynQNk25lFOjoZoU7DJRpc.png?scale-down-to=512" width="150" height="100" alt="Sulu" style="border: 2px solid grey;">
+        <img src="https://framerusercontent.com/images/IXr0RynQNk25lFOjoZoU7DJRpc.png?scale-down-to=512" width="200" height="150" alt="Sulu" style="border: 2px solid grey; width: 170px; height: 170px; padding: 10px;">
       </p>
       <p style="font-size:17px; font-weight:600;">Sulu</p>
       <p align="center">
@@ -238,11 +235,11 @@ Make sure you set user role as 'admin' in database to access all the admin speci
           <img src="https://img.icons8.com/hatch/64/228BE6/internet.png" width="36" height="36" alt="Website"/>
         </a>
       </p>
-    </td>
+    </td> 
     <!-- Sponsor 2: Judge 0 -->
     <td>
       <p align="center">
-        <img src="https://judge0.com/images/white.png" width="150" height="100" alt="Judge 0" style="border: 2px solid grey;">
+        <img src="https://judge0.com/images/white.png" width="150" height="100" alt="Judge 0" style="border: 2px solid grey; width: 170px; height: 170px; padding: 10px;">
       </p>
       <p style="font-size:17px; font-weight:600;">Judge 0</p>
       <p align="center">
