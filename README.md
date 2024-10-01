@@ -239,7 +239,7 @@ Make sure you set user role as 'admin' in database to access all the admin speci
     <!-- Sponsor 2: Judge 0 -->
     <td>
       <p align="center">
-        <img src="https://judge0.com/images/white.png" width="100" height="80" alt="Judge 0" style="border: 2px solid grey; width: 130px; height: 70px; padding: 10px; margin-bottom: 15px;">
+        <img src="https://judge0.com/images/white.png" width="100" height="80" alt="Judge 0" style="border: 2px solid grey; width: 170px; height: 130px; padding: 10px; margin-bottom: 15px;">
       </p>
       <p style="font-size:17px; font-weight:600;">Judge 0</p>
       <p align="center">
