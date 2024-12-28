@@ -238,12 +238,12 @@ Make sure you set user role as 'admin' in database to access all the admin speci
         </a>
       </p>
     </td> 
-    <!-- Sponsor 2: Judge 0 -->
+    <!-- Sponsor 2: Judge0 -->
     <td>
       <p align="center">
-        <img src="public/JUDGE0.svg" width="200" height="150" alt="Judge 0">
+        <img src="public/JUDGE0.svg" width="200" height="150" alt="Judge0">
       </p>
-      <p style="font-size:17px; font-weight:600;">Judge 0</p>
+      <p style="font-size:17px; font-weight:600;">Judge0</p>
       <p align="center">
         <a href="https://judge0.com/">
           <img src="https://img.icons8.com/hatch/64/228BE6/internet.png" width="36" height="36" alt="Website"/>
